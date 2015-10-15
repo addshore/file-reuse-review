@@ -47,6 +47,7 @@ done
 
 # Make some index page
 
+rm index.html
 cp /dev/null index.html
 echo '<html><head></head><body>' >> index.html
 echo '<h1>AG Branch review tool</h1>' >> index.html
