@@ -20,6 +20,7 @@ fi
 git -C master fetch --all --prune
 git -C master reset --hard origin/master
 cd ./master/backend && composer update && cd ./../..
+cp ./config.php ./master/backend/config.php
 
 # Checkout all branches
 
