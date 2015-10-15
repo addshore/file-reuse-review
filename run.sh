@@ -11,6 +11,7 @@ echo -e "\e[33m==== Updating test directory ===="
 if [ ! -d "$MainDirectory" ]; then
 	echo "Main directory '$MainDirectory' does not exist!"
 	git clone $RemoteRepo master
+	cd ./master/redesign/backend && composer install && cd ./../../..
 else
 	echo "Main directory '$MainDirectory' exists!"
 fi
@@ -18,6 +19,7 @@ fi
 # Fetch most recent stuff
 git -C master fetch --all --prune
 git -C master reset --hard origin/master
+cd ./master/redesign/backend && composer update && cd ./../../..
 
 # Checkout all branches
 
@@ -38,6 +40,7 @@ for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origi
 		fi
 
 		git -C $ref checkout -f origin/$ref
+		cd ./$ref/redesign/backend && composer update && cd ./../../..
 	fi
 
 done
