@@ -54,7 +54,7 @@ echo '<p>Please select a branch to review from below:</p>' >> index.html
 echo '<ul>' >> index.html
 for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origin); do
     ref=${ref:20}
-	if [ "$ref" != "HEAD" ]; then
+	if [ "$ref" != "HEAD" ] && [ "$ref" != "cf-history-back" ]; then
 		echo "<li>" >> index.html
 		echo "<a href='$ref'>$ref</a> <a href='$ref/redesign'>(redesign)</a>" >> index.html
 		echo "</li>" >> index.html
