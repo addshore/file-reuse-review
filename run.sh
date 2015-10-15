@@ -26,7 +26,7 @@ cd ./master/redesign/backend && composer update && cd ./../../..
 for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origin); do
     ref=${ref:20}
 
-	if [ "$ref" != "HEAD" ] && [ "$ref" != "master" ]; then
+	if [ "$ref" != "HEAD" ] && [ "$ref" != "master" ] && [ "$ref" != "cf-history-back" ]; then
 		echo -e "\e[33m== Syncing $ref =="
 	
 		if [ ! -d "$ref" ]; then
