@@ -15,7 +15,8 @@ else
 	echo "Main directory '$MainDirectory' exists!"
 fi
 
-git -C master fetch --all
+# Fetch most recent stuff
+git -C master fetch --all --prune
 git -C master reset --hard origin/master
 
 # Checkout all branches
