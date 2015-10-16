@@ -11,7 +11,7 @@ echo -e "\e[33m==== Updating test directory ===="
 if [ ! -d "$MainDirectory" ]; then
 	echo "Main directory '$MainDirectory' does not exist!"
 	git clone $RemoteRepo master
-	cd ./master/backend && composer install && cd ./../..
+	cd ./master/backend && ./../../composer.phar install && cd ./../..
 else
 	echo "Main directory '$MainDirectory' exists!"
 fi
@@ -19,7 +19,7 @@ fi
 # Fetch most recent stuff
 git -C master fetch --all --prune
 git -C master reset --hard origin/master
-cd ./master/backend && composer update && cd ./../..
+cd ./master/backend && ./../../composer.phar update && cd ./../..
 cp ./config.php ./master/backend/config.php
 
 # Checkout all branches
@@ -41,7 +41,7 @@ for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origi
 		fi
 
 		git -C $ref checkout -f origin/$ref
-		cd ./$ref/backend && composer update && cd ./../..
+		cd ./$ref/backend && ./../../composer.phar update && cd ./../..
 	fi
 
 done
