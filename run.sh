@@ -12,6 +12,7 @@ if [ ! -d "$MainDirectory" ]; then
 	echo "Main directory '$MainDirectory' does not exist!"
 	git clone $RemoteRepo master
 	cd ./master/backend && ./../../composer.phar install && cd ./../..
+	cd ./master/redesign && npm i && npm run build && cd ./../..
 else
 	echo "Main directory '$MainDirectory' exists!"
 fi
@@ -29,7 +30,7 @@ for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origi
 
 	if [ "$ref" != "HEAD" ] && [ "$ref" != "master" ] && [ "$ref" != "cf-history-back" ]; then
 		echo -e "\e[33m== Syncing $ref =="
-	
+
 		if [ ! -d "$ref" ]; then
 			echo "Copying whole master repo dir to branch dir"
 			cp -r ./master ./$ref
@@ -42,6 +43,7 @@ for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origi
 
 		git -C $ref checkout -f origin/$ref
 		cd ./$ref/backend && ./../../composer.phar update && cd ./../..
+		cd ./$ref/redesign && npm i && npm run build && cd ./../..
 	fi
 
 done
