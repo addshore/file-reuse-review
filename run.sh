@@ -12,7 +12,6 @@ if [ ! -d "$MainDirectory" ]; then
 	echo "Main directory '$MainDirectory' does not exist!"
 	git clone $RemoteRepo master
 	cd ./master/backend && ./../../composer.phar install && cd ./../..
-	cd ./master/redesign && npm i && npm run build && cd ./../..
 else
 	echo "Main directory '$MainDirectory' exists!"
 fi
@@ -21,6 +20,7 @@ fi
 git -C master fetch --all --prune
 git -C master reset --hard origin/master
 cd ./master/backend && ./../../composer.phar update && cd ./../..
+cd ./master/redesign && npm i && npm run build && cd ./../..
 cp ./config.php ./master/backend/config.php
 
 # Checkout all branches
