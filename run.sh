@@ -20,7 +20,7 @@ fi
 git -C master fetch --all --prune
 git -C master reset --hard origin/master
 cd ./master/backend && ./../../composer.phar update && cd ./../..
-cd ./master/redesign && npm i && npm run build && cd ./../..
+cd ./master && npm i && npm run build && cd ./..
 cp ./config.php ./master/backend/config.php
 
 # Checkout all branches
@@ -43,7 +43,7 @@ for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origi
 
 		git -C $ref checkout -f origin/$ref
 		cd ./$ref/backend && ./../../composer.phar update && cd ./../..
-		cd ./$ref/redesign && npm i && npm run build && cd ./../..
+		cd ./$ref && npm i && npm run build && cd ./..
 	fi
 
 done
@@ -60,7 +60,7 @@ for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origi
     ref=${ref:20}
 	if [ "$ref" != "HEAD" ] && [ "$ref" != "cf-history-back" ]; then
 		echo "<li>" >> index.html
-		echo "<a href='$ref'>$ref</a> <a href='$ref/redesign'>(redesign)</a>" >> index.html
+		echo "<a href='$ref'>$ref</a>" >> index.html
 		echo "</li>" >> index.html
 	fi
 done
