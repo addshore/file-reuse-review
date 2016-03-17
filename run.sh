@@ -54,6 +54,7 @@ rm index.html
 cp /dev/null index.html
 echo '<html><head></head><body>' >> index.html
 echo '<h1>AG Branch review tool</h1>' >> index.html
+echo '<p>See <b><a href="https://lizenzhinweisgenerator.de/" title="Lizenzhinweisgenerator">https://lizenzhinweisgenerator.de/</a></b></p>' >> index.html
 echo '<p>Please select a branch to review from below:</p>' >> index.html
 echo '<ul>' >> index.html
 for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origin); do
@@ -66,5 +67,5 @@ for ref in $(git -C master for-each-ref --format='%(refname)' refs/remotes/origi
 done
 echo '</ul>' >> index.html
 echo "<p>Last updated on: $Date UTC</p>" >> index.html
-echo '<p>You can update these copies by <a href="run.php">clicking here</a></p>' >> index.html
+# echo '<p>You can update these copies by <a href="run.php">clicking here</a></p>' >> index.html
 echo '</body></html>' >> index.html
